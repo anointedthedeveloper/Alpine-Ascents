@@ -76,18 +76,6 @@
             font-size: 1.8rem;
         }
         
-        .visitor-count {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-        
-        .visitor-count i {
-            color: #27ae60;
-        }
-        
         nav ul {
             display: flex;
             list-style: none;
@@ -312,41 +300,21 @@
             transform: scale(1.1);
         }
         
-        /* ===== FOOTER & TICKER ===== */
+        /* ===== FOOTER ===== */
         footer {
             background-color: #2c3e50;
             color: white;
             padding: 60px 0 20px;
+            text-align: center;
         }
         
         .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
             margin-bottom: 40px;
         }
         
-        .ticker-container {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #34495e;
-            color: white;
-            padding: 12px 0;
-            z-index: 1000;
-        }
-        
-        .ticker-content {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-        
-        .ticker-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        footer p {
+            margin: 10px 0;
+            opacity: 0.9;
         }
         
         /* ===== RESPONSIVE DESIGN ===== */
@@ -399,21 +367,21 @@
             section {
                 padding: 60px 0;
             }
+            
+            .records-container {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- ===== HEADER WITH VISITOR COUNT ===== -->
+    <!-- ===== HEADER ===== -->
     <header>
         <div class="container header-content">
             <div class="logo">
                 <i class="fas fa-mountain"></i>
                 <h1>Alpine Ascents</h1>
-            </div>
-            
-            <div class="visitor-count">
-                <i class="fas fa-users"></i>
-                <span>Visitors: <span id="visitorCounter">1</span></span>
             </div>
             
             <div class="menu-toggle" id="menuToggle">
@@ -533,7 +501,7 @@
             <div class="section-title">
                 <h2>Clubs & Organizations</h2>
             </div>
-            <p class="text-center">Find mountaineering clubs and organizations around the world</p>
+            <p class="text-center" style="text-align: center; margin-bottom: 20px;">Find mountaineering clubs and organizations around the world</p>
             <div id="map"></div>
         </div>
     </section>
@@ -630,53 +598,18 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div>
-                    <h3>Alpine Ascents</h3>
-                    <p>Leading mountaineering expeditions since 1986 with safety, expertise, and passion for the mountains.</p>
-                </div>
-                <div>
-                    <h3>Contact</h3>
-                    <p><i class="fas fa-envelope"></i> info@alpineascents.com</p>
-                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-                </div>
-                <div>
-                    <h3>Follow Us</h3>
-                    <p>
-                        <a href="#" style="color: white; margin-right: 15px;"><i class="fab fa-facebook"></i></a>
-                        <a href="#" style="color: white; margin-right: 15px;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" style="color: white;"><i class="fab fa-youtube"></i></a>
-                    </p>
-                </div>
+                <h3>Alpine Ascents</h3>
+                <p>Leading mountaineering expeditions since 1986 with safety, expertise, and passion for the mountains.</p>
+                <p><i class="fas fa-envelope"></i> info@alpineascents.com</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p style="margin-top: 20px;">© 2024 Alpine Ascents. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- ===== SCROLLING TICKER ===== -->
-    <div class="ticker-container">
-        <div class="container ticker-content">
-            <div class="ticker-item">
-                <i class="far fa-calendar"></i>
-                <span id="currentDate">Loading date...</span>
-            </div>
-            <div class="ticker-item">
-                <i class="far fa-clock"></i>
-                <span id="currentTime">Loading time...</span>
-            </div>
-            <div class="ticker-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span id="userLocation">Detecting location...</span>
-            </div>
-        </div>
-    </div>
-
     <!-- ===== JAVASCRIPT ===== -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // Visitor Counter
-        let visitorCount = localStorage.getItem('visitorCount') || 1;
-        document.getElementById('visitorCounter').textContent = visitorCount;
-        localStorage.setItem('visitorCount', parseInt(visitorCount) + 1);
-
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
@@ -712,51 +645,6 @@
                 }
             });
         });
-
-        // Date and Time Ticker
-        function updateDateTime() {
-            const now = new Date();
-            document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-            
-            document.getElementById('currentTime').textContent = now.toLocaleTimeString('en-US', {
-                hour12: true,
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            });
-        }
-        setInterval(updateDateTime, 1000);
-        updateDateTime();
-
-        // Geolocation for Ticker
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
-                    
-                    // Reverse geocoding (using Nominatim as free alternative)
-                    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const city = data.address.city || data.address.town || data.address.village;
-                            const country = data.address.country;
-                            document.getElementById('userLocation').textContent = `${city ? city + ', ' : ''}${country}`;
-                        })
-                        .catch(() => {
-                            document.getElementById('userLocation').textContent = `Lat: ${lat.toFixed(2)}, Lon: ${lon.toFixed(2)}`;
-                        });
-                },
-                () => {
-                    document.getElementById('userLocation').textContent = "Location permission denied";
-                }
-            );
-        }
 
         // Initialize Map
         function initMap() {
