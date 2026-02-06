@@ -1,0 +1,70 @@
+{
+  "activities": [
+    {
+      "id": 1,
+      "name": "Summit Rock Climbing Gym",
+      "type": "Rock Climbing",
+      "description": "Indoor climbing gym with routes for all skill levels. Features top-rope, lead climbing, and bouldering areas.",
+      "distance": 5.2,
+      "rating": 4.7,
+      "difficulty": "All Levels",
+      "features": ["Equipment Rental", "Training Courses", "Climbing Walls", "Cafe"],
+      "image": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 2,
+      "name": "Glacier Peak Ice Climbing",
+      "type": "Ice Climbing",
+      "description": "Winter ice climbing tours with certified guides. Includes equipment and safety training.",
+      "distance": 12.5,
+      "rating": 4.9,
+      "difficulty": "Intermediate",
+      "features": ["Guided Tours", "Safety Gear", "Hotel Pickup", "Photos"],
+      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 3,
+      "name": "Alpine Adventures Hiking",
+      "type": "Mountain Hiking",
+      "description": "Scenic mountain hikes with experienced guides. Day trips and multi-day expeditions available.",
+      "distance": 8.7,
+      "rating": 4.6,
+      "difficulty": "Beginner",
+      "features": ["Guided Hikes", "Picnic Lunch", "Transportation", "Group Discounts"],
+      "image": "https://images.unsplash.com/photo-1508166466929-4c6c56df18f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 4,
+      "name": "Peak Performance Bouldering",
+      "type": "Bouldering",
+      "description": "Dedicated bouldering center with over 200 problems. Regular competitions and training sessions.",
+      "distance": 6.3,
+      "rating": 4.8,
+      "difficulty": "All Levels",
+      "features": ["Bouldering Only", "Training Area", "Yoga Classes", "Community Events"],
+      "image": "https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 5,
+      "name": "Via Ferrata Extreme",
+      "type": "Via Ferrata",
+      "description": "Protected climbing routes with metal cables and ladders. Perfect for beginners wanting mountain experience.",
+      "distance": 18.2,
+      "rating": 4.5,
+      "difficulty": "Beginner",
+      "features": ["Safety Equipment", "Guide Included", "Mountain Views", "Photo Package"],
+      "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 6,
+      "name": "Expedition Base Camp",
+      "type": "Alpine Trekking",
+      "description": "Multi-day alpine trekking expeditions with overnight stays in mountain huts.",
+      "distance": 25.4,
+      "rating": 4.9,
+      "difficulty": "Advanced",
+      "features": ["Multi-day Trips", "Mountain Huts", "Meals Included", "Small Groups"],
+      "image": "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    }
+  ]
+}

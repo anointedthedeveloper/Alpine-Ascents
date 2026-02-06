@@ -4,12 +4,16 @@ const mainNav = document.getElementById('mainNav');
 
 menuToggle.addEventListener('click', () => {
     mainNav.classList.toggle('active');
+    menuToggle.innerHTML = mainNav.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
 });
 
 // Close mobile menu when clicking a link
 document.querySelectorAll('nav a').forEach(link => {
     link.addEventListener('click', () => {
         mainNav.classList.remove('active');
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
     });
 });
 
@@ -17,11 +21,12 @@ document.querySelectorAll('nav a').forEach(link => {
 window.addEventListener('scroll', () => {
     let current = '';
     const sections = document.querySelectorAll('section');
+    const scrollPosition = window.scrollY + 200;
     
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 200)) {
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
             current = section.getAttribute('id');
         }
     });
@@ -34,29 +39,162 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Initialize Map
-function initMap() {
-    const map = L.map('map').setView([28.3949, 84.1240], 3); // Centered on Nepal
-    
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-    
-    // Sample club locations
-    const clubs = [
-        { name: "Alpine Club - Nepal", lat: 27.7172, lon: 85.3240 },
-        { name: "American Alpine Club", lat: 39.7392, lon: -104.9903 },
-        { name: "Alpine Club - Switzerland", lat: 46.8182, lon: 8.2275 },
-        { name: "Japanese Alpine Club", lat: 35.6762, lon: 139.6503 },
-        { name: "British Mountaineering Council", lat: 53.4808, lon: -2.2426 }
-    ];
-    
-    clubs.forEach(club => {
-        L.marker([club.lat, club.lon])
-            .addTo(map)
-            .bindPopup(`<b>${club.name}</b>`);
+// Slideshow Functionality
+let slideIndex = 1;
+let slideshowInterval;
+showSlides(slideIndex);
+startSlideshow();
+
+function preloadImages() {
+    const slides = document.querySelectorAll('.mySlides img');
+    slides.forEach(img => {
+        const prelink = document.createElement('link');
+        prelink.rel = 'preload';
+        prelink.as = 'image';
+        prelink.href = img.src;
+        document.head.appendChild(prelink);
     });
 }
 
-// Initialize map when page loads
-document.addEventListener('DOMContentLoaded', initMap);
+function startSlideshow() {
+    clearInterval(slideshowInterval);
+    slideshowInterval = setInterval(() => {
+        plusSlides(1, true);
+    }, 5000);
+}
+
+function plusSlides(n, auto = false) {
+    showSlides(slideIndex += n);
+    if (!auto) startSlideshow();
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+    startSlideshow();
+}
+
+function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
+    
+    // Remove active class from all slides and dots
+    for (i = 0; i < slides.length; i++) {
+        slides[i].classList.remove("active-slide");
+    }
+    
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    
+    // Show current slide with transition
+    if (slides[slideIndex-1]) {
+        slides[slideIndex-1].classList.add("active-slide");
+    }
+    if (dots[slideIndex-1]) {
+        dots[slideIndex-1].className += " active";
+    }
+}
+
+// Date and Time Ticker
+function updateDateTime() {
+    const now = new Date();
+    const options = { 
+        weekday: 'short', 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    };
+    
+    const dateTimeString = now.toLocaleDateString('en-US', options);
+    const element = document.getElementById('currentDateTime');
+    if (element) {
+        element.textContent = dateTimeString;
+    }
+}
+
+// Custom Visitor Counter
+function updateVisitorCount() {
+    // We'll use a base number + persistent increment in localStorage
+    const BASE_COUNT = 1542;
+    let visits = localStorage.getItem('alpine_ascents_visits');
+    
+    if (!visits) {
+        visits = 1;
+    } else {
+        // Increment only once per session
+        if (!sessionStorage.getItem('alpine_ascents_session_active')) {
+            visits = parseInt(visits) + 1;
+            sessionStorage.setItem('alpine_ascents_session_active', 'true');
+        }
+    }
+    
+    localStorage.setItem('alpine_ascents_visits', visits);
+    
+    const totalVisits = BASE_COUNT + parseInt(visits);
+    const element = document.getElementById('totalVisits');
+    if (element) {
+        element.textContent = totalVisits.toLocaleString();
+    }
+}
+
+// Update Location Display in Status Box
+function updateStatusLocation(city, country) {
+    const element = document.getElementById('userLocationDisplay');
+    if (element && city) {
+        element.textContent = country ? `${city}, ${country}` : city;
+    }
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - 70,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Initialize AOS animations
+AOS.init({
+    duration: 800,
+    once: true,
+    offset: 100,
+    easing: 'ease-out-cubic'
+});
+
+// Initialize everything when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    updateDateTime();
+    updateVisitorCount();
+    preloadImages();
+    
+    // Update time every minute
+    setInterval(updateDateTime, 60000);
+    
+    // Add scroll effect to header
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (window.scrollY > 50) {
+            header.style.padding = '10px 0';
+            header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.15)';
+        } else {
+            header.style.padding = '15px 0';
+            header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
+        }
+    });
+});
