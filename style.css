@@ -69,9 +69,14 @@ header {
 }
 
 .logo img {
-    height: 50px;
+    height: 90px;
     width: auto;
     border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.1);
 }
 
 .logo h1 {
@@ -172,7 +177,7 @@ nav a.active {
 
 .btn:hover {
     background-color: var(--primary-color);
-    transform: translateY(-3px);
+    transform: translateY(-3px) scale(1.05);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -238,8 +243,9 @@ nav a.active {
 }
 
 .info-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(1.02);
     border-top: 4px solid var(--secondary-color);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
 }
 
 .info-card h3 {
@@ -269,7 +275,9 @@ nav a.active {
 }
 
 .record-item:hover {
-    transform: scale(1.05);
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+    background-color: var(--bg-light);
 }
 
 .record-item i {
