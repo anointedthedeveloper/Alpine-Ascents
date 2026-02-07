@@ -108,13 +108,20 @@ function updateDateTime() {
         month: 'short', 
         day: 'numeric',
         hour: '2-digit',
-        minute: '2-digit'
+        minute: '2-digit',
+        second: '2-digit'
     };
     
     const dateTimeString = now.toLocaleDateString('en-US', options);
-    const element = document.getElementById('currentDateTime');
-    if (element) {
-        element.textContent = dateTimeString;
+    const dateTimeElement = document.getElementById('currentDateTime');
+    if (dateTimeElement) {
+        dateTimeElement.textContent = dateTimeString;
+    }
+
+    // Update footer year automatically
+    const yearElement = document.getElementById('footerYear');
+    if (yearElement) {
+        yearElement.textContent = now.getFullYear();
     }
 }
 
@@ -183,8 +190,8 @@ document.addEventListener('DOMContentLoaded', () => {
     updateVisitorCount();
     preloadImages();
     
-    // Update time every minute
-    setInterval(updateDateTime, 60000);
+    // Update time every second
+    setInterval(updateDateTime, 1000);
     
     // Add scroll effect to header
     window.addEventListener('scroll', () => {

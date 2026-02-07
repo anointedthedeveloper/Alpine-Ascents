@@ -72,12 +72,34 @@
                     <a href="#stories" class="btn">View Success Stories</a>
                 </div>
             </div>
+
+            <!-- Slide 4 - Friends Traveling -->
+            <div class="mySlides fade">
+                <img src="friends-traveling-together.jpg" alt="Friends Traveling">
+                <div class="slide-content centered">
+                    <h2>Group Adventures</h2>
+                    <p>Join our group treks and create lifelong memories with fellow adventurers from around the world.</p>
+                    <a href="#about" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Slide 5 - Summit Enjoyment -->
+            <div class="mySlides fade">
+                <img src="portrait-smiling-man-sitting-top-rock-enjoying-with-his-friend.jpg" alt="Summit Enjoyment">
+                <div class="slide-content centered">
+                    <h2>Unforgettable Moments</h2>
+                    <p>Reach the summit and enjoy the breathtaking views that only the highest peaks can offer.</p>
+                    <a href="#gallery" class="btn">View Gallery</a>
+                </div>
+            </div>
             
             <!-- Navigation dots -->
             <div class="dots-container">
                 <span class="dot" onclick="currentSlide(1)"></span>
                 <span class="dot" onclick="currentSlide(2)"></span>
                 <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span>
             </div>
             
             <!-- Navigation arrows -->
@@ -114,24 +136,49 @@
             </div>
             <div class="info-grid">
                 <div class="info-card">
-                    <h3><i class="fas fa-history"></i> History</h3>
-                    <p>Modern mountaineering began in the 18th century with the first ascent of Mont Blanc in 1786. The "Golden Age of Alpinism" (1854-1865) saw many Alpine peaks conquered.</p>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="History">
+                    </div>
+                    <div class="card-content">
+                        <h3><i class="fas fa-history"></i> History</h3>
+                        <p>Modern mountaineering began in the 18th century with the first ascent of Mont Blanc in 1786.</p>
+                    </div>
                 </div>
                 <div class="info-card">
-                    <h3><i class="fas fa-mountain"></i> Types & Styles</h3>
-                    <p>Includes alpine climbing, expedition climbing, rock climbing, ice climbing, and mixed climbing. Styles range from traditional to sport climbing and solo ascents.</p>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Types">
+                    </div>
+                    <div class="card-content">
+                        <h3><i class="fas fa-mountain"></i> Types & Styles</h3>
+                        <p>Includes alpine climbing, expedition climbing, rock climbing, ice climbing, and mixed climbing.</p>
+                    </div>
                 </div>
                 <div class="info-card">
-                    <h3><i class="fas fa-tools"></i> Techniques</h3>
-                    <p>Key techniques include belaying, rappelling, ice axe use, crampon techniques, crevasse rescue, and navigation with map, compass, and GPS.</p>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Techniques">
+                    </div>
+                    <div class="card-content">
+                        <h3><i class="fas fa-tools"></i> Techniques</h3>
+                        <p>Key techniques include belaying, rappelling, ice axe use, and navigation.</p>
+                    </div>
                 </div>
                 <div class="info-card">
-                    <h3><i class="fas fa-campground"></i> Sheltering</h3>
-                    <p>Mountain shelters range from high-altitude tents and bivouac sacks to mountain huts and base camps with proper facilities.</p>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sheltering">
+                    </div>
+                    <div class="card-content">
+                        <h3><i class="fas fa-campground"></i> Sheltering</h3>
+                        <p>Range from high-altitude tents to mountain huts and base camps.</p>
+                    </div>
                 </div>
                 <div class="info-card">
-                    <h3><i class="fas fa-exclamation-triangle"></i> Hazards</h3>
-                    <p>Includes avalanches, falls, altitude sickness, hypothermia, rockfall, weather changes, and crevasses. Proper training and equipment are essential.</p>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1508166466929-4c6c56df18f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hazards">
+                    </div>
+                    <div class="card-content">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Hazards</h3>
+                        <p>Includes avalanches, falls, altitude sickness, and weather changes.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -176,6 +223,20 @@
                     <h3>First 14 Eight-thousanders</h3>
                     <p>Reinhold Messner<br>1970-1986</p>
                 </div>
+                <div class="record-item" data-aos="flip-left" data-aos-delay="500">
+                    <div class="record-image">
+                        <img src="https://images.unsplash.com/photo-1520113282374-96cc2dd6c7f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Youngest Climber">
+                    </div>
+                    <i class="fas fa-child"></i>
+                    <h3>Youngest Everest Climber</h3>
+                    <p>Jordan Romero<br>13 years old</p>
+                </div>
+            </div>
+            <!-- View More Button for Records -->
+            <div class="text-center mt-5">
+                <a href="https://www.google.com/search?q=mountaineering+world+records" target="_blank" class="btn">
+                    <i class="fas fa-search"></i> View More Records
+                </a>
             </div>
         </div>
     </section>
@@ -217,13 +278,59 @@
                 <h2>Success Stories</h2>
             </div>
             <div class="info-grid">
-                <div class="info-card" data-aos="fade-right" data-aos-delay="100">
-                    <h3><i class="fas fa-medal"></i> Everest Summit 2023</h3>
-                    <p>"Our team of 8 climbers successfully summited Everest in May 2023 with Alpine Ascents. The preparation was intense but the guides were exceptional."</p>
+                <div class="info-card story-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="story-image">
+                        <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Everest Summit">
+                    </div>
+                    <div class="story-content">
+                        <h3><i class="fas fa-medal"></i> Everest Summit 2023</h3>
+                        <p>"Our team of 8 climbers successfully summited Everest in May 2023. The preparation was intense but the guides were exceptional."</p>
+                    </div>
                 </div>
-                <div class="info-card" data-aos="fade-left" data-aos-delay="200">
-                    <h3><i class="fas fa-award"></i> Kilimanjaro Charity Climb</h3>
-                    <p>"Raised $50,000 for children's education through our Kilimanjaro climb. The Alpine Ascents team made it safe and memorable for all 15 participants."</p>
+                <div class="info-card story-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="story-image">
+                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kilimanjaro">
+                    </div>
+                    <div class="story-content">
+                        <h3><i class="fas fa-award"></i> Kilimanjaro Charity</h3>
+                        <p>"Raised $50,000 for children's education through our Kilimanjaro climb. A memory that will last a lifetime for all participants."</p>
+                    </div>
+                </div>
+                <div class="info-card story-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="story-image">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Matterhorn">
+                    </div>
+                    <div class="story-content">
+                        <h3><i class="fas fa-mountain"></i> Matterhorn Classic</h3>
+                        <p>"Standing on the summit of the Matterhorn was a lifelong dream. The technical guidance provided was top-notch."</p>
+                    </div>
+                </div>
+                <div class="info-card story-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="story-image">
+                        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Seven Summits">
+                    </div>
+                    <div class="story-content">
+                        <h3><i class="fas fa-trophy"></i> Seven Summits</h3>
+                        <p>"Finished my final peak of the Seven Summits with Alpine Ascents. Their logistical support across seven continents is world-class."</p>
+                    </div>
+                </div>
+                <div class="info-card story-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="story-image">
+                        <img src="friends-traveling-together.jpg" alt="Friends Trekking">
+                    </div>
+                    <div class="story-content">
+                        <h3><i class="fas fa-heart"></i> Friends Trek</h3>
+                        <p>"As a group of friends, we needed a team that understood our specific needs. Alpine Ascents helped us reach the top together."</p>
+                    </div>
+                </div>
+                <div class="info-card story-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="story-image">
+                        <img src="portrait-smiling-man-sitting-top-rock-enjoying-with-his-friend.jpg" alt="Smiling Hiker">
+                    </div>
+                    <div class="story-content">
+                        <h3><i class="fas fa-users"></i> Summit Success</h3>
+                        <p>"Sitting on the top of the rock enjoying the view with my friend. It was the best bonding experience we've ever had."</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -248,10 +355,44 @@
                 <div class="gallery-item" data-aos="zoom-in">
                     <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Team Climbing">
                 </div>
+                <div class="gallery-item" data-aos="zoom-in">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Snow Peaks">
+                </div>
+                <div class="gallery-item" data-aos="zoom-in">
+                    <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Climbing Action">
+                </div>
+            </div>
+            <!-- View More Button for Gallery -->
+            <div class="text-center mt-5">
+                <a href="https://www.google.com/search?q=alpine+activities+pictures" target="_blank" class="btn">
+                    <i class="fas fa-images"></i> View More Pictures
+                </a>
             </div>
         </div>
     </section>
 
+    <!-- ===== ADVENTURE VIDEOS SECTION ===== -->
+    <section id="adventure-videos" class="adventure-videos">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Adventure in Motion</h2>
+            </div>
+            <div class="videos-grid">
+                <div class="video-item" data-aos="fade-up" data-aos-delay="100">
+                    <video autoplay muted loop playsinline>
+                        <source src="5433700_Coll_wavebreak_People_3840x2160.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="video-item" data-aos="fade-up" data-aos-delay="200">
+                    <video autoplay muted loop playsinline>
+                        <source src="6012730_Person_People_3840x2160 (1).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- ===== LATEST DEVELOPMENTS ===== -->
     <section id="developments" class="developments">
         <div class="container">
@@ -260,16 +401,31 @@
             </div>
             <div class="info-grid">
                 <div class="info-card" data-aos="zoom-in" data-aos-delay="100">
-                    <h3><i class="fas fa-snowflake"></i> New Ice Climbing Gear</h3>
-                    <p>Latest ice axes and crampons with improved ergonomics and safety features are revolutionizing ice climbing techniques.</p>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ice Gear">
+                    </div>
+                    <div class="card-content">
+                        <h3><i class="fas fa-snowflake"></i> New Ice Climbing Gear</h3>
+                        <p>Latest ice axes and crampons with improved ergonomics and safety features are revolutionizing techniques.</p>
+                    </div>
                 </div>
                 <div class="info-card" data-aos="zoom-in" data-aos-delay="200">
-                    <h3><i class="fas fa-satellite-dish"></i> Satellite Communication</h3>
-                    <p>Compact satellite devices now provide reliable communication even in the most remote mountain regions.</p>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Communication">
+                    </div>
+                    <div class="card-content">
+                        <h3><i class="fas fa-satellite-dish"></i> Satellite Communication</h3>
+                        <p>Compact satellite devices now provide reliable communication even in the most remote mountain regions.</p>
+                    </div>
                 </div>
                 <div class="info-card" data-aos="zoom-in" data-aos-delay="300">
-                    <h3><i class="fas fa-wind"></i> Weather Prediction Tech</h3>
-                    <p>Advanced micro-weather forecasting specifically for mountainous regions has dramatically improved safety.</p>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1508166466929-4c6c56df18f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Weather Tech">
+                    </div>
+                    <div class="card-content">
+                        <h3><i class="fas fa-wind"></i> Weather Prediction Tech</h3>
+                        <p>Advanced micro-weather forecasting has dramatically improved safety in mountainous regions.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -283,16 +439,31 @@
             </div>
             <div class="info-grid">
                 <div class="info-card" data-aos="fade-up" data-aos-delay="100">
-                    <h3><i class="fas fa-user-check"></i> Physical Preparation</h3>
-                    <p>Start training 3-6 months in advance with cardio, strength training, and altitude simulation if possible.</p>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Preparation">
+                    </div>
+                    <div class="card-content">
+                        <h3><i class="fas fa-user-check"></i> Physical Preparation</h3>
+                        <p>Start training 3-6 months in advance with cardio, strength training, and altitude simulation.</p>
+                    </div>
                 </div>
                 <div class="info-card" data-aos="fade-up" data-aos-delay="200">
-                    <h3><i class="fas fa-first-aid"></i> Safety First</h3>
-                    <p>Always climb with proper equipment, check weather conditions, and never exceed your skill level without guidance.</p>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Safety">
+                    </div>
+                    <div class="card-content">
+                        <h3><i class="fas fa-first-aid"></i> Safety First</h3>
+                        <p>Always climb with proper equipment and never exceed your skill level without guidance.</p>
+                    </div>
                 </div>
                 <div class="info-card" data-aos="fade-up" data-aos-delay="300">
-                    <h3><i class="fas fa-leaf"></i> Environmental Responsibility</h3>
-                    <p>Follow Leave No Trace principles, respect local ecosystems, and minimize your environmental impact.</p>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1508166466929-4c6c56df18f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Environment">
+                    </div>
+                    <div class="card-content">
+                        <h3><i class="fas fa-leaf"></i> Environmental Responsibility</h3>
+                        <p>Follow Leave No Trace principles and respect local ecosystems.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -331,9 +502,7 @@
             <div class="footer-content">
                 <h3>Alpine Ascents</h3>
                 <p>Leading mountaineering expeditions since 1986 with safety, expertise, and passion for the mountains.</p>
-                <p><i class="fas fa-envelope"></i> info@alpineascents.com</p>
-                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-                <p style="margin-top: 20px;">© 2025 Alpine Ascents. All rights reserved.</p>
+                <p style="margin-top: 20px;">&copy; <span id="footerYear">2026</span> Alpine Ascents. All rights reserved.</p>
             </div>
         </div>
     </footer>
