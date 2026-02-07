@@ -190,6 +190,22 @@ document.addEventListener('DOMContentLoaded', () => {
     updateVisitorCount();
     preloadImages();
     
+    // Status Box Toggle
+    const statusBoxContainer = document.getElementById('statusBoxContainer');
+    const statusToggle = document.getElementById('statusToggle');
+    
+    if (statusToggle && statusBoxContainer) {
+        statusToggle.addEventListener('click', () => {
+            statusBoxContainer.classList.toggle('minimized');
+            const icon = statusToggle.querySelector('i');
+            if (statusBoxContainer.classList.contains('minimized')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-info-circle';
+            }
+        });
+    }
+    
     // Update time every second
     setInterval(updateDateTime, 1000);
     

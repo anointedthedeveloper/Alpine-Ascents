@@ -8,12 +8,69 @@ class LocalActivities {
     }
     
     async init() {
-        await this.getUserLocation();
+        // First try to check if we already have permission or if we should use IP as fallback
+        const permissionStatus = await this.checkPermission();
+        
+        if (permissionStatus === 'granted') {
+            await this.getUserLocation();
+        } else {
+            // Show a "Grant Permission" UI in the container initially
+            this.showPermissionRequest();
+            // Still try IP-based location in the background for the status box
+            await this.getIPLocation();
+        }
+        
         await this.loadActivities();
         this.displayActivities();
         this.updateLocationDisplay();
     }
-    
+
+    async checkPermission() {
+        if (navigator.permissions && navigator.permissions.query) {
+            try {
+                const result = await navigator.permissions.query({ name: 'geolocation' });
+                return result.state; // 'granted', 'prompt', or 'denied'
+            } catch (e) {
+                return 'prompt';
+            }
+        }
+        return 'prompt';
+    }
+
+    showPermissionRequest() {
+        const container = document.getElementById('activitiesContainer');
+        if (container) {
+            container.innerHTML = `
+                <div class="permission-request" style="text-align: center; padding: 40px; background: #fff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                    <i class="fas fa-map-marked-alt" style="font-size: 3rem; color: #27ae60; margin-bottom: 20px;"></i>
+                    <h3>Discover Alpine Activities Near You</h3>
+                    <p>We use your location to find climbing spots and trekking clubs in your immediate area.</p>
+                    <button id="grantLocationBtn" class="btn" style="margin-top: 20px;">
+                        <i class="fas fa-location-arrow"></i> Enable Location
+                    </button>
+                    <p style="font-size: 0.8rem; color: #888; margin-top: 15px;">Note: If you see an "overlay detected" error, please close the status bar at the bottom and try again.</p>
+                </div>
+            `;
+            
+            const btn = document.getElementById('grantLocationBtn');
+            if (btn) {
+                btn.addEventListener('click', async () => {
+                    // Briefly hide status box to avoid overlay issues on mobile
+                    const statusBox = document.getElementById('statusBoxContainer');
+                    if (statusBox) statusBox.style.display = 'none';
+                    
+                    await this.getUserLocation();
+                    await this.loadActivities();
+                    this.displayActivities();
+                    this.updateLocationDisplay();
+                    
+                    // Show status box again
+                    if (statusBox) statusBox.style.display = 'block';
+                });
+            }
+        }
+    }
+
     async getUserLocation() {
         return new Promise((resolve) => {
             if (navigator.geolocation) {

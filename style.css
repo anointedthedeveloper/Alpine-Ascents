@@ -146,6 +146,7 @@ nav a.active::after {
     width: 100%;
     overflow: hidden;
     margin-top: 0;
+    padding: 0;
 }
 
 .slideshow-container {
@@ -509,10 +510,14 @@ nav a.active::after {
     color: var(--primary-color);
 }
 
-.about-image img {
-    width: 100%;
-    border-radius: 15px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+.about .info-card {
+    grid-column: 1 / -1;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about .card-image {
+    height: 350px;
 }
 
 /* Info Cards */
@@ -619,7 +624,7 @@ nav a.active::after {
     height: 420px;
     display: flex;
     flex-direction: column;
-    width: calc(33.333% - 30px);
+    flex: 0 1 calc(33.333% - 30px);
     min-width: 280px;
 }
 
@@ -762,6 +767,47 @@ nav a.active::after {
     z-index: 2000;
     width: auto;
     max-width: 90%;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.status-box-container.minimized {
+    transform: translateX(-50%) translateY(calc(100% - 10px));
+}
+
+.status-toggle {
+    position: absolute;
+    top: -45px;
+    right: 0;
+    background: rgba(30, 57, 28, 0.9);
+    color: var(--white);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+}
+
+.status-toggle:hover {
+    background: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .status-box-container.minimized {
+        transform: translateY(calc(100% - 10px));
+    }
+    .status-toggle {
+        top: -40px;
+        right: 0;
+        width: 35px;
+        height: 35px;
+    }
 }
 
 .status-box {
@@ -807,11 +853,23 @@ nav a.active::after {
 
 @media (max-width: 768px) {
     .status-box {
-        gap: 20px;
-        padding: 12px 20px;
-        flex-wrap: wrap;
-        justify-content: center;
-        border-radius: 20px;
+        gap: 10px;
+        padding: 10px 15px;
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 15px;
+    }
+    .status-box-container {
+        bottom: 10px;
+        left: 10px;
+        transform: none;
+        max-width: 250px;
+    }
+    .status-item i {
+        font-size: 1rem;
+    }
+    .status-value {
+        font-size: 0.85rem;
     }
 }
 
@@ -855,25 +913,16 @@ footer i {
 }
 
 @media (max-width: 992px) {
-    .about-content {
-        grid-template-columns: 1fr;
+    .record-item {
+        flex: 0 1 calc(50% - 30px);
     }
-    
-    .slide-content h2 {
-        font-size: 2.5rem;
-    }
-    
-    .slide-content p {
-        font-size: 1.1rem;
-    }
-    
-    .visitor-counter {
-        padding: 10px 15px;
-        font-size: 0.85rem;
-    }
-    
-    .counter-number {
-        font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .record-item {
+        flex: 0 1 100%;
+        height: auto;
+        min-height: 350px;
     }
 }
 
@@ -884,20 +933,26 @@ footer i {
     
     nav ul {
         position: fixed;
-        top: 70px;
+        top: 0;
         left: -100%;
         flex-direction: column;
         background-color: white;
         width: 100%;
+        height: 100vh;
+        justify-content: center;
         text-align: center;
         padding: 30px 0;
         box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         transition: left 0.4s ease;
         z-index: 999;
     }
-    
+
     nav ul.active {
         left: 0;
+    }
+
+    .menu-toggle {
+        z-index: 1001;
     }
     
     .slide-content h2 {

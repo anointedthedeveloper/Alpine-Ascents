@@ -114,15 +114,17 @@
             <div class="section-title" data-aos="fade-up">
                 <h2>About Mountaineering</h2>
             </div>
-            <div class="about-content">
-                <div class="about-text" data-aos="fade-right">
-                    <h3>The Art of Climbing Mountains</h3>
-                    <p>Mountaineering, or mountain climbing, is the sport of reaching high points in mountainous terrain, valued for the challenge, physical exertion, and connection with nature. It involves technical skills, physical fitness, and mental resilience.</p>
-                    <p>At Alpine Ascents, we combine decades of experience with cutting-edge safety protocols to make mountain adventures accessible while maintaining the highest standards of safety and environmental responsibility.</p>
-                    <a href="#details" class="btn">Learn More</a>
-                </div>
-                <div class="about-image" data-aos="fade-left">
-                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mountain Climbing">
+            <div class="info-grid">
+                <div class="info-card" data-aos="fade-up">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mountain Climbing">
+                    </div>
+                    <div class="card-content">
+                        <h3>The Art of Climbing Mountains</h3>
+                        <p>Mountaineering, or mountain climbing, is the sport of reaching high points in mountainous terrain, valued for the challenge, physical exertion, and connection with nature. It involves technical skills, physical fitness, and mental resilience.</p>
+                        <p>At Alpine Ascents, we combine decades of experience with cutting-edge safety protocols to make mountain adventures accessible while maintaining the highest standards of safety and environmental responsibility.</p>
+                        <a href="#details" class="btn">Learn More</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -470,7 +472,10 @@
     </section>
 
     <!-- ===== STATUS BOX ===== -->
-    <div class="status-box-container">
+    <div class="status-box-container" id="statusBoxContainer">
+        <button class="status-toggle" id="statusToggle" title="Toggle Status Box">
+            <i class="fas fa-info-circle"></i>
+        </button>
         <div class="status-box">
             <div class="status-item">
                 <i class="fas fa-users"></i>
@@ -503,6 +508,11 @@
                 <h3>Alpine Ascents</h3>
                 <p>Leading mountaineering expeditions since 1986 with safety, expertise, and passion for the mountains.</p>
                 <p style="margin-top: 20px;">&copy; <span id="footerYear">2026</span> Alpine Ascents. All rights reserved.</p>
+                <p style="font-size: 0.9rem; color: #aaa; margin-top: 10px;">Developed by 
+                    <a href="https://github.com/anointedthedeveloper" target="_blank" style="color: #aaa; text-decoration: none;">Anointed Agunloye</a>, 
+                    <a href="https://github.com/EacAnu" target="_blank" style="color: #aaa; text-decoration: none;">Adeoye Oluwadamilade</a>, 
+                    <a href="https://github.com/kamsionyeka884-rgb" target="_blank" style="color: #aaa; text-decoration: none;">Mmesoma Oyenka</a>
+                </p>
             </div>
         </div>
     </footer>
