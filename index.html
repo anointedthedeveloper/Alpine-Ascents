@@ -9,7 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/sections.css">
+    <link rel="stylesheet" href="css/components.css">
     <link rel="icon" type="image/png" href="logo-removebg(1).png">
 </head>
 <body>
@@ -114,17 +117,15 @@
             <div class="section-title" data-aos="fade-up">
                 <h2>About Mountaineering</h2>
             </div>
-            <div class="info-grid">
-                <div class="info-card" data-aos="fade-up">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mountain Climbing">
-                    </div>
-                    <div class="card-content">
-                        <h3>The Art of Climbing Mountains</h3>
-                        <p>Mountaineering, or mountain climbing, is the sport of reaching high points in mountainous terrain, valued for the challenge, physical exertion, and connection with nature. It involves technical skills, physical fitness, and mental resilience.</p>
-                        <p>At Alpine Ascents, we combine decades of experience with cutting-edge safety protocols to make mountain adventures accessible while maintaining the highest standards of safety and environmental responsibility.</p>
-                        <a href="#details" class="btn">Learn More</a>
-                    </div>
+            <div class="about-content">
+                <div class="about-text" data-aos="fade-right">
+                    <h3>The Art of Climbing Mountains</h3>
+                    <p>Mountaineering, or mountain climbing, is the sport of reaching high points in mountainous terrain, valued for the challenge, physical exertion, and connection with nature. It involves technical skills, physical fitness, and mental resilience.</p>
+                    <p>At Alpine Ascents, we combine decades of experience with cutting-edge safety protocols to make mountain adventures accessible while maintaining the highest standards of safety and environmental responsibility.</p>
+                    <a href="#details" class="btn">Learn More</a>
+                </div>
+                <div class="about-image" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mountain Climbing">
                 </div>
             </div>
         </div>
@@ -243,20 +244,16 @@
         </div>
     </section>
 
-    <!-- ===== LOCAL ACTIVITIES SECTION ===== -->
+    <!-- ===== GLOBAL CLUBS & CAMPS SECTION ===== -->
     <section id="local-activities" class="local-activities">
         <div class="container">
             <div class="section-title">
-                <h2>Alpine Activities Near You</h2>
+                <h2>Global Mountaineering Clubs & Camps</h2>
             </div>
             
-            <!-- Location Display -->
-            <div class="location-display" id="locationDisplay">
-                <i class="fas fa-map-marker-alt"></i>
-                <span id="currentLocation">Detecting your location...</span>
-            </div>
+            <!-- Location Display Removed -->
             
-            <!-- Local Activities List -->
+            <!-- Global Clubs List -->
             <div class="activities-container" id="activitiesContainer">
                 <div class="loading-spinner">
                     <i class="fas fa-mountain fa-spin"></i>
@@ -492,10 +489,10 @@
                 </div>
             </div>
             <div class="status-item">
-                <i class="fas fa-map-marker-alt"></i>
+                <i class="fas fa-mountain"></i>
                 <div class="status-info">
-                    <span class="status-label">Your Location</span>
-                    <span class="status-value" id="userLocationDisplay">Detecting...</span>
+                    <span class="status-label">Active Expeditions</span>
+                    <span class="status-value">12 Global</span>
                 </div>
             </div>
         </div>
@@ -521,7 +518,9 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="script.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/slideshow.js"></script>
+    <script src="js/status.js"></script>
     <script src="local-activities.js"></script>
 </body>
 </html>

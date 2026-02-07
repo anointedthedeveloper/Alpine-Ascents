@@ -22,7 +22,6 @@ class LocalActivities {
         
         await this.loadActivities();
         this.displayActivities();
-        this.updateLocationDisplay();
     }
 
     async checkPermission() {
@@ -62,7 +61,6 @@ class LocalActivities {
                     await this.getUserLocation();
                     await this.loadActivities();
                     this.displayActivities();
-                    this.updateLocationDisplay();
                     
                     // Show status box again
                     if (statusBox) statusBox.style.display = 'block';
@@ -154,79 +152,112 @@ class LocalActivities {
     async loadActivities() {
         const cityName = this.userLocation.city || 'Local';
         
-        const activityTypes = [
-            'Rock Climbing',
-            'Ice Climbing',
-            'Mountain Hiking',
-            'Alpine Trekking',
-            'Bouldering',
-            'Via Ferrata'
+        // Global Mountaineering Organizations
+        const globalClubs = [
+            {
+                name: "The Alpine Club",
+                type: "International Club",
+                location: "London, United Kingdom",
+                coords: { lat: 51.5246, lon: -0.0847 },
+                description: "The world's first mountaineering club, founded in 1857. They organize expeditions to the Greater Ranges.",
+                successStory: "Recent successful exploration of the Zanskar range in India."
+            },
+            {
+                name: "American Alpine Club",
+                type: "National Organization",
+                location: "Golden, Colorado, USA",
+                coords: { lat: 39.7555, lon: -105.2211 },
+                description: "A non-profit organization that provides climbing community, advocacy, and conservation.",
+                successStory: "Successfully campaigned for the protection of Bear's Ears climbing areas."
+            },
+            {
+                name: "Himalayan Club",
+                type: "Expedition Group",
+                location: "Mumbai, India",
+                coords: { lat: 18.9220, lon: 72.8347 },
+                description: "Dedicated to the exploration and knowledge of the Himalaya. Organizes annual youth camps.",
+                successStory: "Organized the 2023 Siachen Glacier scientific expedition."
+            },
+            {
+                name: "Club Alpino Italiano",
+                type: "National Club",
+                location: "Milan, Italy",
+                coords: { lat: 45.4642, lon: 9.1900 },
+                description: "One of the oldest alpine clubs, managing hundreds of mountain huts across the Alps.",
+                successStory: "Managed the massive 2024 Dolomites Safety Awareness Camp."
+            },
+            {
+                name: "Nigeria Mountaineering Federation",
+                type: "National Federation",
+                location: "Abuja, Nigeria",
+                coords: { lat: 9.0765, lon: 7.3986 },
+                description: "Promoting mountain sports and trekking across the diverse Nigerian landscapes.",
+                successStory: "Successful Chappal Waddi summit expedition in 2023."
+            },
+            {
+                name: "Shere Hills Climbing Club",
+                type: "Regional Club",
+                location: "Jos, Nigeria",
+                coords: { lat: 9.9189, lon: 8.8917 },
+                description: "Specializing in rock climbing and high-altitude training in the scenic Plateau region.",
+                successStory: "Completed the 2024 Shere Peak endurance challenge with 50 participants."
+            },
+            {
+                name: "Idanre Peak Explorers",
+                type: "Trekking Group",
+                location: "Ondo, Nigeria",
+                coords: { lat: 7.1100, lon: 5.1100 },
+                description: "Focused on the historical and geological exploration of the Idanre Hills heritage site.",
+                successStory: "Discovered three new trekking routes around the ancient hilltop settlements."
+            },
+            {
+                name: "Obudu Mountain Explorers",
+                type: "Hiking Club",
+                location: "Cross River, Nigeria",
+                coords: { lat: 6.6439, lon: 9.3664 },
+                description: "Exploring the high-altitude Plateau of Obudu, known for its mist-covered peaks.",
+                successStory: "Successfully guided a group of 30 to the highest point of the Obudu Ranch."
+            },
+            {
+                name: "Zuma Rock Climbing Community",
+                type: "Climbing Club",
+                location: "Niger State, Nigeria",
+                coords: { lat: 9.1292, lon: 7.2311 },
+                description: "Dedicated to technical rock climbing and bouldering around the iconic Zuma Rock.",
+                successStory: "Established two new climbing routes on the southern face of Zuma Rock."
+            },
+            {
+                name: "Ghana Mountaineering Club",
+                type: "Regional Group",
+                location: "Accra, Ghana",
+                coords: { lat: 5.6037, lon: -0.1870 },
+                description: "Exploring the peaks of the Akwapim-Togo ranges and promoting eco-tourism.",
+                successStory: "Organized the first Mount Afadja youth climbing festival."
+            },
+            {
+                name: "Indian Mountaineering Foundation",
+                type: "National Body",
+                location: "New Delhi, India",
+                coords: { lat: 28.6139, lon: 77.2090 },
+                description: "The apex national body for mountaineering and rock climbing in India.",
+                successStory: "Coordinated multiple successful 8000m peak expeditions in 2024."
+            }
         ];
-        
-        const difficulties = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
-        
-        const facilities = [
-            'Equipment Rental',
-            'Guided Tours',
-            'Training Courses',
-            'Climbing Walls',
-            'Safety Gear',
-            'Certified Instructors'
-        ];
-        
-        this.activities = [];
-        
-        for (let i = 0; i < 6; i++) {
-            const type = activityTypes[i % activityTypes.length];
-            const distance = (Math.random() * 15 + 2).toFixed(1);
-            
-            this.activities.push({
-                id: i + 1,
-                name: `${cityName} ${type} Club`,
-                type: type,
-                distance: parseFloat(distance),
-                difficulty: difficulties[Math.floor(Math.random() * difficulties.length)],
-                rating: (Math.random() * 0.5 + 4.5).toFixed(1), // Higher ratings for personalization
-                description: `Discover the best ${type.toLowerCase()} spots right here in ${cityName}. Our local experts provide specialized guidance for all skill levels in the ${cityName} area.`,
-                features: facilities.slice(0, Math.floor(Math.random() * 3) + 3),
-                image: this.getActivityImage(type),
-                coordinates: {
-                    lat: this.userLocation.lat + (Math.random() - 0.5) * 0.1,
-                    lon: this.userLocation.lon + (Math.random() - 0.5) * 0.1
-                }
-            });
-        }
-        
-        this.activities.sort((a, b) => a.distance - b.distance);
+
+        this.activities = globalClubs.map((club, i) => ({
+            id: i + 1,
+            name: club.name,
+            type: club.type,
+            location: club.location,
+            distance: club.location === "London, United Kingdom" ? 0 : (Math.random() * 5000 + 100).toFixed(0),
+            description: club.description,
+            successStory: club.successStory,
+            coords: club.coords
+        }));
+
         this.loading = false;
     }
-    
-    getActivityImage(type) {
-        const imageMap = {
-            'Rock Climbing': 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            'Ice Climbing': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            'Mountain Hiking': 'https://images.unsplash.com/photo-1508166466929-4c6c56df18f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            'Alpine Trekking': 'https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            'Bouldering': 'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            'Via Ferrata': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-        };
-        
-        return imageMap[type] || 'https://images.unsplash.com/photo-1508166466929-4c6c56df18f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
-    }
-    
-    updateLocationDisplay() {
-        const locationElement = document.getElementById('currentLocation');
-        if (this.userLocation.city) {
-            const locationText = `${this.userLocation.city}, ${this.userLocation.country}`;
-            locationElement.textContent = locationText;
-            
-            // Also update the global status box if the function exists
-            if (typeof updateStatusLocation === 'function') {
-                updateStatusLocation(this.userLocation.city, this.userLocation.country);
-            }
-        }
-    }
-    
+
     displayActivities() {
         const container = document.getElementById('activitiesContainer');
         const seeMoreButton = document.getElementById('seeMoreButton');
@@ -235,51 +266,40 @@ class LocalActivities {
             container.innerHTML = `
                 <div class="loading-spinner">
                     <i class="fas fa-mountain fa-spin"></i>
-                    <p>Finding alpine activities in your area...</p>
+                    <p>Loading global organizations...</p>
                 </div>
             `;
-            return;
-        }
-        
-        if (this.activities.length === 0) {
-            container.innerHTML = `
-                <div class="no-activities">
-                    <i class="fas fa-mountain"></i>
-                    <h3>No activities found in your area</h3>
-                    <p>Try searching in a nearby city or check back later.</p>
-                </div>
-            `;
-            seeMoreButton.style.display = 'none';
             return;
         }
         
         container.innerHTML = this.activities.map(activity => `
-            <div class="activity-card" data-aos="fade-up">
-                <div class="activity-image">
-                    <img src="${activity.image}" alt="${activity.name}">
-                </div>
+            <div class="activity-card" data-aos="fade-up" style="border-left: 5px solid #27ae60;">
                 <div class="activity-content">
-                    <span class="activity-type">${activity.type}</span>
-                    <h3>${activity.name}</h3>
-                    <div class="activity-distance">
-                        <i class="fas fa-map-marker-alt"></i>
-                        ${activity.distance} km away • ${activity.difficulty} Level
+                    <span class="activity-type" style="background: #27ae60; color: white; padding: 2px 10px; border-radius: 20px; font-size: 0.8rem;">${activity.type}</span>
+                    <h3 style="margin-top: 10px;">${activity.name}</h3>
+                    <div class="activity-location" style="margin: 10px 0; color: #666;">
+                        <i class="fas fa-map-marker-alt" style="color: #e74c3c;"></i> ${activity.location}
                     </div>
-                    <p class="activity-description">${activity.description}</p>
-                    <div class="activity-rating">
-                        <i class="fas fa-star" style="color: #f1c40f;"></i>
-                        ${activity.rating}/5 • ${Math.floor(Math.random() * 100) + 20} reviews
+                    <p class="activity-description" style="font-weight: 600;">${activity.description}</p>
+                    <div class="camp-success" style="background: #f1fcf1; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                        <strong style="color: #27ae60;"><i class="fas fa-check-circle"></i> Camp Success Story:</strong>
+                        <p style="font-style: italic; margin-top: 5px;">${activity.successStory}</p>
                     </div>
-                    <div class="activity-features">
-                        ${activity.features.map(feature => 
-                            `<span class="feature-tag">${feature}</span>`
-                        ).join('')}
-                    </div>
+                    <button class="btn" style="margin-top: 20px; width: 100%; padding: 10px;" onclick="window.open('https://www.google.com/maps/search/${encodeURIComponent(activity.name + ' ' + activity.location)}', '_blank')">
+                        <i class="fas fa-external-link-alt"></i> View on Google Maps
+                    </button>
                 </div>
             </div>
         `).join('');
         
-        seeMoreButton.style.display = 'block';
+        if (seeMoreButton) {
+            seeMoreButton.style.display = 'block';
+            seeMoreButton.innerHTML = `
+                <button class="btn btn-large" onclick="window.open('https://www.google.com/search?q=mountaineering+clubs+worldwide+list', '_blank')">
+                    <i class="fas fa-globe"></i> View More Clubs Worldwide
+                </button>
+            `;
+        }
     }
 }
 
