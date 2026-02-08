@@ -225,22 +225,6 @@ class LocalActivities {
                 coords: { lat: 9.1292, lon: 7.2311 },
                 description: "Dedicated to technical rock climbing and bouldering around the iconic Zuma Rock.",
                 successStory: "Established two new climbing routes on the southern face of Zuma Rock."
-            },
-            {
-                name: "Ghana Mountaineering Club",
-                type: "Regional Group",
-                location: "Accra, Ghana",
-                coords: { lat: 5.6037, lon: -0.1870 },
-                description: "Exploring the peaks of the Akwapim-Togo ranges and promoting eco-tourism.",
-                successStory: "Organized the first Mount Afadja youth climbing festival."
-            },
-            {
-                name: "Indian Mountaineering Foundation",
-                type: "National Body",
-                location: "New Delhi, India",
-                coords: { lat: 28.6139, lon: 77.2090 },
-                description: "The apex national body for mountaineering and rock climbing in India.",
-                successStory: "Coordinated multiple successful 8000m peak expeditions in 2024."
             }
         ];
 
