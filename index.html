@@ -490,6 +490,13 @@
                 </div>
             </div>
             <div class="status-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="status-info">
+                    <span class="status-label">Your Location</span>
+                    <span class="status-value" id="userLocationDisplay">Detecting...</span>
+                </div>
+            </div>
+            <div class="status-item">
                 <i class="fas fa-chart-line"></i>
                 <div class="status-info">
                     <span class="status-label">Success Rate</span>
@@ -523,5 +530,141 @@
     <script src="js/slideshow.js"></script>
     <script src="js/status.js"></script>
     <script src="local-activities.js"></script>
+    
+    <!-- ===== LOCATION DETECTION SCRIPT (ADDED WITHOUT ALTERING EXISTING CODE) ===== -->
+    <script>
+        (function() {
+            // Initialize AOS if not already initialized
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    once: true,
+                    offset: 100
+                });
+            }
+            
+            // Update footer year dynamically
+            const footerYear = document.getElementById('footerYear');
+            if (footerYear) {
+                footerYear.textContent = new Date().getFullYear();
+            }
+            
+            // ===== LOCATION DETECTION FOR STATUS BOX =====
+            // This adds location detection to your existing status box without altering any other code
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    // Success callback
+                    function(position) {
+                        const lat = position.coords.latitude.toFixed(4);
+                        const lon = position.coords.longitude.toFixed(4);
+                        
+                        // Try to get city/country name
+                        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10`)
+                            .then(response => response.json())
+                            .then(data => {
+                                const city = data.address?.city || data.address?.town || data.address?.village || data.address?.county || data.address?.state;
+                                const country = data.address?.country;
+                                const locationEl = document.getElementById('userLocationDisplay');
+                                
+                                if (locationEl) {
+                                    if (city && country) {
+                                        locationEl.innerHTML = `${city}, ${country}`;
+                                    } else {
+                                        locationEl.innerHTML = `${lat}°N, ${lon}°E`;
+                                    }
+                                    locationEl.style.color = '#2ecc71';
+                                }
+                            })
+                            .catch(() => {
+                                // Fallback to coordinates
+                                const locationEl = document.getElementById('userLocationDisplay');
+                                if (locationEl) {
+                                    locationEl.innerHTML = `${lat}°N, ${lon}°E`;
+                                    locationEl.style.color = '#2ecc71';
+                                }
+                            });
+                    },
+                    // Error callback
+                    function(error) {
+                        const locationEl = document.getElementById('userLocationDisplay');
+                        if (locationEl) {
+                            switch(error.code) {
+                                case error.PERMISSION_DENIED:
+                                    locationEl.innerHTML = '📍 Location denied';
+                                    break;
+                                case error.POSITION_UNAVAILABLE:
+                                    locationEl.innerHTML = '📍 Unavailable';
+                                    break;
+                                case error.TIMEOUT:
+                                    locationEl.innerHTML = '📍 Timeout';
+                                    break;
+                                default:
+                                    locationEl.innerHTML = '📍 Location off';
+                            }
+                            locationEl.style.color = '#e74c3c';
+                        }
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 0
+                    }
+                );
+            } else {
+                const locationEl = document.getElementById('userLocationDisplay');
+                if (locationEl) {
+                    locationEl.innerHTML = '📍 Not supported';
+                    locationEl.style.color = '#e74c3c';
+                }
+            }
+            
+            // ===== ADDITIONAL: Small toast notification for location (OPTIONAL, COMMENTED OUT) =====
+            // Uncomment below if you want a separate location banner
+            /*
+            setTimeout(function() {
+                if (document.getElementById('userLocationDisplay') && 
+                    document.getElementById('userLocationDisplay').innerHTML !== 'Detecting...' &&
+                    !document.getElementById('userLocationDisplay').innerHTML.includes('denied') &&
+                    !document.getElementById('userLocationDisplay').innerHTML.includes('off')) {
+                    
+                    const toast = document.createElement('div');
+                    toast.style.cssText = `
+                        position: fixed;
+                        bottom: 80px;
+                        right: 20px;
+                        background: #2c3e50;
+                        color: white;
+                        padding: 12px 20px;
+                        border-radius: 8px;
+                        font-size: 14px;
+                        z-index: 9999;
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                        border-left: 4px solid #e74c3c;
+                        animation: fadeInOut 5s ease forwards;
+                    `;
+                    toast.innerHTML = `<i class="fas fa-map-pin" style="color: #e74c3c; margin-right: 8px;"></i> Location detected: ${document.getElementById('userLocationDisplay').innerHTML}`;
+                    document.body.appendChild(toast);
+                    
+                    setTimeout(() => { toast.remove(); }, 5000);
+                }
+            }, 2000);
+            */
+            
+            // Add animation keyframes if not present
+            if (!document.querySelector('#locationAnimationStyle')) {
+                const style = document.createElement('style');
+                style.id = 'locationAnimationStyle';
+                style.textContent = `
+                    @keyframes fadeInOut {
+                        0% { opacity: 0; transform: translateY(20px); }
+                        10% { opacity: 1; transform: translateY(0); }
+                        90% { opacity: 1; transform: translateY(0); }
+                        100% { opacity: 0; transform: translateY(-20px); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        })();
+    </script>
 </body>
 </html>
