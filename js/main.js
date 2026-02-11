@@ -59,26 +59,26 @@ function initHeaderEffect() {
     });
 }
 
-// Custom Visitor Counter
+// Custom Visitor Counter - STARTS FROM 1
 function updateVisitorCount() {
-    const BASE_COUNT = 1542;
     let visits = localStorage.getItem('alpine_ascents_visits');
     
     if (!visits) {
-        visits = 1;
+        visits = 1; // First time visitor
     } else {
         if (!sessionStorage.getItem('alpine_ascents_session_active')) {
-            visits = parseInt(visits) + 1;
+            visits = parseInt(visits) + 1; // New session, increment
             sessionStorage.setItem('alpine_ascents_session_active', 'true');
+        } else {
+            visits = parseInt(visits); // Same session, keep same count
         }
     }
     
     localStorage.setItem('alpine_ascents_visits', visits);
     
-    const totalVisits = BASE_COUNT + parseInt(visits);
     const element = document.getElementById('totalVisits');
     if (element) {
-        element.textContent = totalVisits.toLocaleString();
+        element.textContent = visits.toLocaleString();
     }
 }
 
