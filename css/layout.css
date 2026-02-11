@@ -53,6 +53,7 @@ nav a {
     padding: 8px 0;
     position: relative;
     transition: var(--transition);
+    white-space: nowrap;
 }
 
 nav a:hover {
@@ -238,11 +239,7 @@ nav a.active::after {
 }
 
 /* Layout Responsive */
-@media (max-width: 992px) {
-    .slide-content h2 { font-size: 3rem; }
-}
-
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .menu-toggle { display: block; z-index: 1001; }
     
     nav ul {
@@ -263,7 +260,8 @@ nav a.active::after {
 
     nav ul.active { left: 0; }
     
-    .slide-content h2 { font-size: 2rem; }
+    .slide-content h2 { font-size: 2.2rem; }
+    .slide-content p { font-size: 1.1rem; }
     .slide-content.centered { padding: 30px; width: 95%; }
     
     .prev, .next {

@@ -113,3 +113,12 @@ section {
         font-size: 1rem;
     }
 }
+
+@media (max-width: 480px) {
+    .section-title h2 {
+        font-size: 1.6rem;
+    }
+    section {
+        padding: 40px 0;
+    }
+}

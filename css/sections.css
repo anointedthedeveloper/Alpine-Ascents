@@ -225,7 +225,7 @@
 
 .activities-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
     margin-top: 30px;
 }
@@ -281,6 +281,14 @@
 /* Sections Responsive */
 @media (max-width: 1200px) { .about-content { gap: 40px; } }
 @media (max-width: 992px) {
+    .about-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 30px;
+    }
+    .about-image {
+        order: -1;
+    }
     .info-grid { grid-template-columns: repeat(2, 1fr); }
     .info-card { grid-column: auto; }
     #details .info-card:nth-child(4), #details .info-card:nth-child(5) { grid-column: auto; }
