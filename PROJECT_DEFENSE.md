@@ -9,10 +9,9 @@
   - **Bootstrap 5**: For responsive layout components.
   - **FontAwesome 6**: For scalable vector icons.
   - **AOS (Animate On Scroll)**: For engaging entrance animations.
-  - **Leaflet.js**: For interactive map integration (Local Activities).
-  - **BigDataCloud API**: For CORS-compliant reverse geocoding.
-  - **Nominatim (OpenStreetMap)**: Primary geocoding source.
-  - **ipapi.co**: Fallback for IP-based location detection.
+  - **BigDataCloud API**: For CORS-compliant reverse geocoding (Ticker only).
+  - **Nominatim (OpenStreetMap)**: Primary geocoding source (Ticker only).
+  - **ipapi.co**: Fallback for IP-based location detection (Ticker only).
 
 ## 3. Key Features & Implementation
 ### A. Dynamic Scrolling Ticker
@@ -29,9 +28,9 @@
 - **Storage**: Uses `localStorage` to persist total visits and `sessionStorage` to track active sessions, ensuring the counter only increments on new visits/reloads, not every page action.
 - **Placement**: Strategically placed in the header for high visibility.
 
-### D. Local Activities Explorer
-- **Interactive Map**: Integrated with Leaflet.js to show global mountaineering clubs and local spots.
-- **Filtering**: Allows users to find activities near their detected location.
+### D. Alpine Activities Explorer
+- **Curated List**: Showcases 9 major mountaineering organizations and clubs globally.
+- **Accessibility**: Provides immediate access to activity information without requiring location permissions.
 
 ## 4. Predicted Questions & Answers
 
@@ -39,7 +38,7 @@
 *A: For better separation of concerns, improved maintainability, and browser caching benefits. It keeps the HTML clean and focused on structure.*
 
 **Q: How do you handle cases where a user denies location access?**
-*A: The system detects the denial via the error callback in `getCurrentPosition` and automatically triggers an IP-based location lookup as a fallback. If that also fails, it displays "Location unavailable".*
+*A: For the status ticker, the system detects the denial via the error callback in `getCurrentPosition` and automatically triggers an IP-based location lookup as a fallback. If that also fails, it displays "Location unavailable". The Alpine Activities section remains fully functional as it uses a curated dataset available to all users.*
 
 **Q: How is the visitor count protected from artificial inflation?**
 *A: We use a session-based flag (`sessionStorage`). The count only increments if the session flag is missing, preventing multiple increments during a single browsing session on the same tab.*

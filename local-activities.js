@@ -1,157 +1,16 @@
 // Local Activities Module
 class LocalActivities {
     constructor() {
-        this.userLocation = null;
         this.activities = [];
-        this.loading = true;
         this.init();
     }
     
-    async init() {
-        // First try to check if we already have permission or if we should use IP as fallback
-        const permissionStatus = await this.checkPermission();
-        
-        if (permissionStatus === 'granted') {
-            await this.getUserLocation();
-        } else {
-            // Show a "Grant Permission" UI in the container initially
-            this.showPermissionRequest();
-            // Still try IP-based location in the background for the status box
-            await this.getIPLocation();
-        }
-        
-        await this.loadActivities();
+    init() {
+        this.loadActivities();
         this.displayActivities();
     }
 
-    async checkPermission() {
-        if (navigator.permissions && navigator.permissions.query) {
-            try {
-                const result = await navigator.permissions.query({ name: 'geolocation' });
-                return result.state; // 'granted', 'prompt', or 'denied'
-            } catch (e) {
-                return 'prompt';
-            }
-        }
-        return 'prompt';
-    }
-
-    showPermissionRequest() {
-        const container = document.getElementById('activitiesContainer');
-        if (container) {
-            container.innerHTML = `
-                <div class="permission-request" style="text-align: center; padding: 40px; background: #fff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
-                    <i class="fas fa-map-marked-alt" style="font-size: 3rem; color: #27ae60; margin-bottom: 20px;"></i>
-                    <h3>Discover Alpine Activities Near You</h3>
-                    <p>We use your location to find climbing spots and trekking clubs in your immediate area.</p>
-                    <button id="grantLocationBtn" class="btn" style="margin-top: 20px;">
-                        <i class="fas fa-location-arrow"></i> Enable Location
-                    </button>
-                    <p style="font-size: 0.8rem; color: #888; margin-top: 15px;">Note: If you see an "overlay detected" error, please close the status bar at the bottom and try again.</p>
-                </div>
-            `;
-            
-            const btn = document.getElementById('grantLocationBtn');
-            if (btn) {
-                btn.addEventListener('click', async () => {
-                    // Briefly hide status box to avoid overlay issues on mobile
-                    const statusBox = document.getElementById('statusBoxContainer');
-                    if (statusBox) statusBox.style.display = 'none';
-                    
-                    await this.getUserLocation();
-                    await this.loadActivities();
-                    this.displayActivities();
-                    
-                    // Show status box again
-                    if (statusBox) statusBox.style.display = 'block';
-                });
-            }
-        }
-    }
-
-    async getUserLocation() {
-        return new Promise((resolve) => {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    async (position) => {
-                        this.userLocation = {
-                            lat: position.coords.latitude,
-                            lon: position.coords.longitude
-                        };
-                        
-                        // Try to get city name
-                        try {
-                            const response = await fetch(
-                                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${this.userLocation.lat}&lon=${this.userLocation.lon}`
-                            );
-                            const data = await response.json();
-                            this.userLocation.city = data.address.city || 
-                                                   data.address.town || 
-                                                   data.address.village ||
-                                                   data.address.county ||
-                                                   'Your Area';
-                            this.userLocation.country = data.address.country || '';
-                        } catch (error) {
-                            this.userLocation.city = 'Your Location';
-                        }
-                        
-                        resolve();
-                    },
-                    () => {
-                        // Fallback to IP-based location
-                        this.getIPLocation().then(resolve);
-                    },
-                    { timeout: 5000 }
-                );
-            } else {
-                this.getIPLocation().then(resolve);
-            }
-        });
-    }
-    
-    async getIPLocation() {
-        try {
-            // Using the provided API key for ip-api.com (pro) or similar
-            const apiKey = 'tE6LT91lTvOLl2Bp0VgvQwvmtQ4uhyLdKu73s0JvaJ1IWwHXtioJ5UpMjSy8FnVE';
-            const response = await fetch(`https://pro.ip-api.com/json/?key=${apiKey}`);
-            const data = await response.json();
-            
-            if (data.status === 'success') {
-                this.userLocation = {
-                    lat: data.lat,
-                    lon: data.lon,
-                    city: data.city,
-                    country: data.country
-                };
-            } else {
-                throw new Error('API request failed');
-            }
-        } catch (error) {
-            // Fallback to free service if pro fails
-            try {
-                const response = await fetch('https://ipapi.co/json/');
-                const data = await response.json();
-                this.userLocation = {
-                    lat: data.latitude,
-                    lon: data.longitude,
-                    city: data.city,
-                    country: data.country_name
-                };
-            } catch (fallbackError) {
-                // Default to a major city
-                this.userLocation = {
-                    lat: 40.7128,
-                    lon: -74.0060,
-                    city: 'New York',
-                    country: 'USA'
-                };
-            }
-        }
-    }
-    
-    async loadActivities() {
-        const cityName = this.userLocation.city || 'Local';
-        
+    loadActivities() {
         // Global Mountaineering Organizations
         const globalClubs = [
             {
@@ -233,28 +92,17 @@ class LocalActivities {
             name: club.name,
             type: club.type,
             location: club.location,
-            distance: club.location === "London, United Kingdom" ? 0 : (Math.random() * 5000 + 100).toFixed(0),
             description: club.description,
             successStory: club.successStory,
             coords: club.coords
         }));
-
-        this.loading = false;
     }
 
     displayActivities() {
         const container = document.getElementById('activitiesContainer');
         const seeMoreButton = document.getElementById('seeMoreButton');
         
-        if (this.loading) {
-            container.innerHTML = `
-                <div class="loading-spinner">
-                    <i class="fas fa-mountain fa-spin"></i>
-                    <p>Loading global organizations...</p>
-                </div>
-            `;
-            return;
-        }
+        if (!container) return;
         
         container.innerHTML = this.activities.map(activity => `
             <div class="activity-card" data-aos="fade-up" style="border-left: 5px solid #27ae60;">
@@ -284,21 +132,6 @@ class LocalActivities {
                 </button>
             `;
         }
-    }
-}
-
-// Google Maps integration
-function openGoogleMaps() {
-    // Access the global localActivities instance
-    const activitiesInstance = window.localActivities;
-    
-    if (activitiesInstance && activitiesInstance.userLocation) {
-        const { lat, lon, city } = activitiesInstance.userLocation;
-        // Search for activities NEAR the detected latitude and longitude
-        const query = encodeURIComponent(`alpine activities climbing hiking`);
-        window.open(`https://www.google.com/maps/search/${query}/@${lat},${lon},12z`, '_blank');
-    } else {
-        window.open('https://www.google.com/maps/search/alpine+activities+climbing/', '_blank');
     }
 }
 

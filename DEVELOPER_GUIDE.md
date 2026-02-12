@@ -5,7 +5,7 @@ This guide provides technical documentation for developers who wish to modify or
 ## 1. Project Architecture
 The project is a static web application built with a modular approach:
 - **Separation of Concerns**: HTML handles structure, CSS handles styling, and JavaScript handles dynamic behavior and data fetching.
-- **External Dependencies**: Uses CDNs for Bootstrap (UI), AOS (Animations), Leaflet (Maps), and Font Awesome (Icons).
+- **External Dependencies**: Uses CDNs for Bootstrap (UI), AOS (Animations), and Font Awesome (Icons).
 
 ## 2. Directory Structure
 ```text
@@ -19,7 +19,7 @@ The project is a static web application built with a modular approach:
 │   ├── main.js         # Core initialization and menu logic
 │   ├── slideshow.js    # Hero slider logic
 │   ├── status.js       # Status box and date/time tracking
-├── local-activities.js # Geolocation and activity data logic
+├── local-activities.js # Activity data logic and display logic
 ├── index.html          # Main entry point
 └── *.jpg, *.png, etc.  # Assets
 ```
@@ -27,7 +27,7 @@ The project is a static web application built with a modular approach:
 ## 3. Customizing Content
 ### Updating Clubs/Activities
 Open `local-activities.js` and modify the `globalClubs` array inside the `loadActivities()` method. Each club object requires:
-- `name`, `type`, `location`, `coords` (lat/lon), `description`, and `successStory`.
+- `name`, `type`, `location`, `description`, and `successStory`.
 
 ### Modifying the Status Box
 The status box values can be updated in `index.html` (for static values) or `js/status.js` (for dynamic values like time).
@@ -35,8 +35,8 @@ The status box values can be updated in `index.html` (for static values) or `js/
 ### Adding New Records
 New mountaineering records can be added directly in the `records` section of `index.html`. Follow the existing Bootstrap column pattern for consistency.
 
-## 4. Geolocation Logic
-The application uses a fallback strategy:
+## 4. Ticker Geolocation Logic
+The status ticker uses a fallback strategy:
 1. `navigator.geolocation`: Browser-native high accuracy location.
 2. `ip-api.com` (Pro): High-speed IP-based location fallback.
 3. `ipapi.co`: Secondary IP-based fallback.
