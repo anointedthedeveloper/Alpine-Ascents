@@ -37,6 +37,23 @@ header {
     font-size: 1.8rem;
     color: var(--primary-color);
     letter-spacing: -1px;
+    margin-bottom: 0;
+    line-height: 1.2;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-visits {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.header-visits i {
+    margin-right: 5px;
 }
 
 nav ul {
@@ -278,4 +295,5 @@ nav a.active::after {
     .slide-content p { font-size: 1rem; }
     .logo h1 { font-size: 1.4rem; }
     .logo img { height: 70px; }
+    .header-visits { font-size: 0.75rem; }
 }
